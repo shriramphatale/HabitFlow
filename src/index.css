@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- CUSTOM SCROLLBAR STYLES --- */
+
+@layer utilities {
+  /* For Webkit browsers (Chrome, Edge, Safari) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; /* Height for horizontal scrollbars */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-300 dark:bg-zinc-800 rounded-full;
+    border: 2px solid transparent; /* Creates padding around the thumb */
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-400 dark:bg-zinc-600;
+  }
+}
+
+/* Hide scrollbar for elements with class .scrollbar-hide */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* For Firefox */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
