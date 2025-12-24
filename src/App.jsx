@@ -453,15 +453,18 @@ const Dashboard = () => {
   );
 };
 
-// --- MAIN LAYOUT -------------------------------------------------------------
+// --- MAIN LAYOUT (FIXED) -----------------------------------------------------
 
 export default function App() {
   return (
     <HabitProvider>
-      <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col md:flex-row text-zinc-900 font-sans selection:bg-emerald-100 dark:selection:bg-emerald-900">
+      {/* 1. CHANGED: min-h-screen -> h-screen overflow-hidden 
+          This locks the viewport and prevents "double scrollbars" or rendering lines 
+      */}
+      <div className="h-screen overflow-hidden bg-zinc-50 dark:bg-zinc-950 flex flex-col md:flex-row text-zinc-900 font-sans selection:bg-emerald-100 dark:selection:bg-emerald-900">
         
         {/* Desktop Sidebar */}
-        <aside className="hidden md:flex w-64 border-r border-zinc-200 dark:border-zinc-800 flex-col p-6 sticky top-0 h-screen bg-white dark:bg-zinc-950 z-20">
+        <aside className="hidden md:flex w-64 border-r border-zinc-200 dark:border-zinc-800 flex-col p-6 h-full bg-white dark:bg-zinc-950 z-20">
           <div className="flex items-center gap-2 mb-10 text-emerald-600 dark:text-emerald-500">
             <Activity size={28} />
             <span className="font-bold text-xl tracking-tight text-zinc-900 dark:text-white">HabitFlow</span>
@@ -478,18 +481,24 @@ export default function App() {
           </div>
         </aside>
 
-        {/* Mobile Nav Header */}
-        <div className="md:hidden bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 p-4 flex items-center justify-between sticky top-0 z-40 shadow-sm">
-           <div className="flex items-center gap-2">
-             <Activity size={24} className="text-emerald-500"/>
-             <span className="font-bold text-lg dark:text-white">HabitFlow</span>
-           </div>
+        {/* 2. ADDED: A layout wrapper for the right side (Header + Content) */}
+        <div className="flex-1 flex flex-col h-full relative">
+          
+          {/* Mobile Nav Header */}
+          <div className="md:hidden bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 p-4 flex items-center justify-between shrink-0 z-40 shadow-sm">
+             <div className="flex items-center gap-2">
+               <Activity size={24} className="text-emerald-500"/>
+               <span className="font-bold text-lg dark:text-white">HabitFlow</span>
+             </div>
+          </div>
+
+          {/* Main Content Area */}
+          {/* This ensures ONLY this area scrolls when you add many tasks */}
+          <main className="flex-1 overflow-y-auto p-4 md:p-8 scroll-smooth">
+            <Dashboard />
+          </main>
         </div>
 
-        {/* Main Content Area */}
-        <main className="flex-1 overflow-y-auto">
-          <Dashboard />
-        </main>
       </div>
     </HabitProvider>
   );
