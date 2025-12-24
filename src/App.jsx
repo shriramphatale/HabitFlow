@@ -299,7 +299,7 @@ const HabitCard = ({ habit }) => {
   const totalDays = logs.filter(l => l.habitId === habit.id).length;
 
   return (
-    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
+    <div className="min-w-0 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
       <div className="flex justify-between items-start mb-6">
         <div>
           <h3 className="text-xl font-bold text-zinc-800 dark:text-zinc-100">{habit.name}</h3>
