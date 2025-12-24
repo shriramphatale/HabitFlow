@@ -212,7 +212,7 @@ const Heatmap = ({ habitId, logs }) => {
   }, [logs, habitId]);
 
   return (
-    <div className="w-full overflow-x-auto pb-4">
+    <div className="w-full overflow-x-auto pb-4 scrollbar-hide">
       <div className="min-w-max px-2"> {/* Added px-2 padding to prevent edge clipping */}
         
         {/* Month Labels */}
